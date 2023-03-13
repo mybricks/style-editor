@@ -1,0 +1,131 @@
+@import "@radix-ui/colors/blackA.css";
+@import "@radix-ui/colors/mauve.css";
+@import "@radix-ui/colors/violet.css";
+
+/* reset */
+
+.Select {
+  :global {
+    button:focus,
+    button:focus-visible {
+      outline: none;
+    }
+  }
+}
+
+.SelectTrigger {
+  width: 114px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0px;
+  padding: 0 8px;
+  font-size: 12px;
+  line-height: 1;
+  height: 100%;
+  gap: 5px;
+  background-color: transparent;
+  box-sizing: border-box;
+  box-shadow: none;
+
+  overflow: hidden;
+  /*文本不会换行*/
+  white-space: nowrap;
+  /*当文本溢出包含元素时，以省略号表示超出的文本*/
+  text-overflow: ellipsis;
+
+  &:focus,
+  &:focus-visible {
+    outline: none;
+  }
+
+  &:focus {
+    // background-color: var(--mauve3);
+  }
+
+  &:hover {
+    border-color: transparent;
+  }
+
+  > span:first-child {
+    flex: 1;
+    font-size: 12px;
+    font-weight: 400;
+  }
+
+  > span {
+    text-overflow: ellipsis;
+  }
+}
+
+.SelectIcon {
+  color: #f86508;
+}
+
+.SelectContent {
+  overflow: hidden;
+  background-color: white;
+  border-radius: 6px;
+  box-shadow: 0px 10px 38px -10px rgba(22, 23, 24, 0.35),
+    0px 10px 20px -15px rgba(22, 23, 24, 0.2);
+}
+
+.SelectViewport {
+  padding: 5px;
+}
+
+.SelectItem {
+  font-size: 13px;
+  line-height: 1;
+  color: #f86508;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  height: 25px;
+  padding: 0 35px 0 25px;
+  position: relative;
+  user-select: none;
+}
+
+.SelectItem[data-disabled] {
+  color: #f86508;
+  pointer-events: none;
+}
+
+.SelectItem[data-highlighted] {
+  outline: none;
+  background-color: #f86508;
+  color: var(--violet1);
+}
+
+.SelectLabel {
+  padding: 0 25px;
+  font-size: 12px;
+  line-height: 25px;
+  color: var(--mauve11);
+}
+
+.SelectSeparator {
+  height: 1px;
+  background-color: var(--violet6);
+  margin: 5px;
+}
+
+.SelectItemIndicator {
+  position: absolute;
+  left: 0;
+  width: 25px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.SelectScrollButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 25px;
+  background-color: white;
+  color: var(--violet11);
+  cursor: default;
+}

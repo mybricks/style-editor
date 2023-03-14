@@ -34,8 +34,8 @@ const textAlignOptions = ["left", "center", "right"],
 const FontPlugin = ({ value, onChange }: Props) => {
   const onPropertyChange = (property: string, value: string) => {
     // @ts-ignore
-    if (Number.isNaN(parseInt(value))) value = "0";
-    onChange({ [property]: parseInt(value) });
+    if (Number.isNaN(parseInt(value))) value = "0px";
+    onChange({ [property]: parseInt(value) + "px" });
   };
 
   return (
@@ -99,7 +99,7 @@ const FontPlugin = ({ value, onChange }: Props) => {
           }
           className={classes.fontSize}
           // @ts-ignore
-          value={value?.fontSize || 12}
+          value={parseInt(value?.fontSize || "12px")}
           onChange={(value) => onPropertyChange("fontSize", value)}
         />
       </Panel.Content>
@@ -114,7 +114,7 @@ const FontPlugin = ({ value, onChange }: Props) => {
             </Tooltip>
           }
           // @ts-ignore
-          value={value?.lineHeight || 0}
+          value={parseInt(value?.lineHeight || "0px")}
           // @ts-ignore
           onChange={(value) => onPropertyChange("lineHeight", value)}
         />
@@ -128,7 +128,7 @@ const FontPlugin = ({ value, onChange }: Props) => {
             </Tooltip>
           }
           // @ts-ignore
-          value={value?.letterSpacing || 0}
+          value={parseInt(value?.letterSpacing || "0px")}
           // @ts-ignore
           onChange={(value) => onPropertyChange("letterSpacing", value)}
         />

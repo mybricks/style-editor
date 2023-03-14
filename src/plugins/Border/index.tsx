@@ -119,11 +119,11 @@ const BorderPlugin = ({ borderProps, value, onChange }: Props) => {
 
   const onPropertyChange = (property: string, value: string) => {
     if (Number.isNaN(parseInt(value))) value = "0px";
-    onChange({ [property]: parseInt(value) });
+    onChange({ [property]: parseInt(value) + "px" });
   };
 
   const onBorderWidthChange = () => {
-    const borderTopWidth = value?.borderTopWidth || 0;
+    const borderTopWidth = value?.borderTopWidth || "0px";
 
     onChange({
       borderTopWidth,
@@ -135,7 +135,7 @@ const BorderPlugin = ({ borderProps, value, onChange }: Props) => {
   };
 
   const onBorderRadiusChange = () => {
-    const borderTopLeftRadius = value.borderTopLeftRadius || 0;
+    const borderTopLeftRadius = value.borderTopLeftRadius || "0px";
     onChange({
       borderTopLeftRadius,
       borderTopRightRadius: borderTopLeftRadius,
@@ -220,7 +220,7 @@ const BorderPlugin = ({ borderProps, value, onChange }: Props) => {
                     } else {
                       if (Number.isNaN(parseInt(value))) value = "0px";
                       // @ts-ignore
-                      value = parseInt(value);
+                      value = parseInt(value) + "px";
                       onChange({
                         borderTopLeftRadius: value,
                         borderTopRightRadius: value,
@@ -292,7 +292,7 @@ const BorderPlugin = ({ borderProps, value, onChange }: Props) => {
             onChange={(value) => {
               if (Number.isNaN(parseInt(value))) value = "0px";
               // @ts-ignore
-              value = parseInt(value);
+              value = parseInt(value) + "px";
               if (!borderWidthAdvanced) {
                 onChange({
                   borderTopWidth: value,

@@ -6,11 +6,7 @@ export interface StyleEditorProps {
   options: {
     presets: [];
     plugins: StylePlugin[];
-    borderProps?: {
-      borderColor: boolean;
-      borderRadius: boolean;
-      borderWidth: boolean;
-    };
+    backgroundProps?: {};
   };
   value: CSSProperties;
   onChange: (value: CSSProperties) => void;

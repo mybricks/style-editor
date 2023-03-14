@@ -15,7 +15,13 @@ const StyleEditor = ({ options, value, onChange }: StyleEditorProps) => {
     switch (plugin) {
       case "background":
         // @ts-ignore
-        return <BackgroundPlugin value={value} onChange={onValueChange} />;
+        return (
+          <BackgroundPlugin
+            backgroundProps={options?.backgroundProps || {}}
+            value={value}
+            onChange={onValueChange}
+          />
+        );
       case "border":
         // @ts-ignore
         return (

@@ -87,7 +87,7 @@ const FontPlugin = ({ value, onChange }: Props) => {
           options={fontWeigthOptions}
           // @ts-ignore
           value={value?.fontWeight ? `${value?.fontWeight}` : ""}
-          onChange={(value) => onPropertyChange("fontWeight", value)}
+          onChange={(value) => onChange({ fontWeight: value })}
         />
         <Input
           addonBefore={

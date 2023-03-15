@@ -15,7 +15,7 @@ const IconLetterSpacing = () => {
       >
         <path
           id="路径 2"
-          fill-rule="evenodd"
+          fillRule="evenodd"
           fill="currentColor"
           transform="translate(4.199219999999968 4)  rotate(0 3.8010899999999994 4)"
           opacity="1"
@@ -23,7 +23,7 @@ const IconLetterSpacing = () => {
         ></path>
         <path
           id="路径 3"
-          fill-rule="evenodd"
+          fillRule="evenodd"
           fill="currentColor"
           transform="translate(6 9)  rotate(0 2 0.5)"
           opacity="1"
@@ -31,7 +31,7 @@ const IconLetterSpacing = () => {
         ></path>
         <path
           id="路径 4"
-          fill-rule="evenodd"
+          fillRule="evenodd"
           fill="currentColor"
           transform="translate(1.5 1.5)  rotate(0 0.5 6.5)"
           opacity="1"
@@ -39,7 +39,7 @@ const IconLetterSpacing = () => {
         ></path>
         <path
           id="路径 5"
-          fill-rule="evenodd"
+          fillRule="evenodd"
           fill="currentColor"
           transform="translate(13.5 1.5)  rotate(0 0.5 6.5)"
           opacity="1"

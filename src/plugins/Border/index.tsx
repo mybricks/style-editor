@@ -206,6 +206,7 @@ const BorderPlugin = ({ borderProps, value, onChange }: Props) => {
               .slice(0, borderRadiusAdvanced ? 4 : 1)
               .map((borderRadiusKey) => (
                 <Input
+                  key={borderRadiusKey}
                   style={{
                     width: borderRadiusAdvanced ? "auto" : 48,
                     flex: borderRadiusAdvanced ? 1 : 0,
@@ -328,6 +329,7 @@ const BorderPlugin = ({ borderProps, value, onChange }: Props) => {
         <div className={classes.borderWidth}>
           {Object.keys(borderWidthMap).map((key) => (
             <Input
+              key={key}
               className={classes.borderWidthItem}
               addonBefore={renderActiveBorderWidthIcon(key)}
               innerStyle={{ width: 30 }}

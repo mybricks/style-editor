@@ -10,8 +10,8 @@ export default function () {
     >
       <path
         d="M0 12V0h1v12H0zm3-9h6v6H3V3zm1 1v4h4V4H4zm7 8V0h1v12h-1z"
-        fill-rule="evenodd"
-        fill-opacity="1"
+        fillRule="evenodd"
+        fillOpacity="1"
         fill="#000"
         stroke="none"
       ></path>

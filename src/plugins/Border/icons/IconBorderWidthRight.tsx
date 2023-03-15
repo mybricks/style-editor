@@ -10,15 +10,15 @@ export default function () {
     >
       <path
         d="M7.5 6H14v1H7.5c-.276 0-.5.224-.5.5v9c0 .276.224.5.5.5H14v1H7.5c-.828 0-1.5-.672-1.5-1.5v-9C6 6.672 6.672 6 7.5 6z"
-        fill-rule="evenodd"
-        fill-opacity=".3"
+        fillRule="evenodd"
+        fillOpacity=".3"
         fill="#000"
         stroke="none"
       ></path>
       <path
         d="M18 6v12h-1V6h1z"
-        fill-rule="evenodd"
-        fill-opacity="1"
+        fillRule="evenodd"
+        fillOpacity="1"
         fill="#000"
         stroke="none"
       ></path>

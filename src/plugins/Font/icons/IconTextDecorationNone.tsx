@@ -15,7 +15,7 @@ const IconTextDecorationNone = () => {
       >
         <path
           id="矩形 1"
-          fill-rule="evenodd"
+          fillRule="evenodd"
           fill="currentColor"
           transform="translate(7.5 1.5)  rotate(45 0.5 6.5)"
           opacity="1"

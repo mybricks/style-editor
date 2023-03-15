@@ -10,8 +10,8 @@ export default function () {
     >
       <path
         d="M0 0h12v1H0V0zm0 4h12v2H0V4zm12 5H0v3h12V9z"
-        fill-rule="nonzero"
-        fill-opacity="1"
+        fillRule="nonzero"
+        fillOpacity="1"
         fill="#000"
         stroke="none"
       ></path>

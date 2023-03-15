@@ -15,7 +15,7 @@ const IconTextDecorationUnderline = () => {
       >
         <path
           id="Aa"
-          fill-rule="evenodd"
+          fillRule="evenodd"
           fill="currentColor"
           transform="translate(1.3000000000000682 3)  rotate(0 6.5 4)"
           opacity="1"
@@ -23,7 +23,7 @@ const IconTextDecorationUnderline = () => {
         ></path>
         <path
           id="矩形"
-          fill-rule="evenodd"
+          fillRule="evenodd"
           fill="currentColor"
           transform="translate(1 12)  rotate(0 7 0.5)"
           opacity="1"

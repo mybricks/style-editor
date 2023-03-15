@@ -17,6 +17,7 @@ const StyleEditor = ({ options, value, onChange }: StyleEditorProps) => {
         // @ts-ignore
         return (
           <BackgroundPlugin
+            key={plugin}
             backgroundProps={options?.backgroundProps || {}}
             value={value}
             onChange={onValueChange}
@@ -26,6 +27,7 @@ const StyleEditor = ({ options, value, onChange }: StyleEditorProps) => {
         // @ts-ignore
         return (
           <BorderPlugin
+            key={plugin}
             // @ts-ignore
             borderProps={options?.borderProps || {}}
             value={value}
@@ -33,9 +35,13 @@ const StyleEditor = ({ options, value, onChange }: StyleEditorProps) => {
           />
         );
       case "font":
-        return <FontPlugin value={value} onChange={onValueChange} />;
+        return (
+          <FontPlugin key={plugin} value={value} onChange={onValueChange} />
+        );
       case "padding":
-        return <PaddingPlugin value={value} onChange={onValueChange} />;
+        return (
+          <PaddingPlugin key={plugin} value={value} onChange={onValueChange} />
+        );
     }
   };
 

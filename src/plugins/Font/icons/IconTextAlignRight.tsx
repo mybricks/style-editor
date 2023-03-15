@@ -17,7 +17,7 @@ const IconTextAlignRight = () => {
           <g opacity="1" transform="translate(0 0)  rotate(0 6 5)">
             <path
               id="路径 1"
-              fill-rule="evenodd"
+              fillRule="evenodd"
               fill="currentColor"
               transform="translate(4 3)  rotate(0 4 0.5)"
               opacity="1"
@@ -25,7 +25,7 @@ const IconTextAlignRight = () => {
             ></path>
             <path
               id="路径 2"
-              fill-rule="evenodd"
+              fillRule="evenodd"
               fill="currentColor"
               transform="translate(0 6)  rotate(0 6 0.5)"
               opacity="1"
@@ -33,7 +33,7 @@ const IconTextAlignRight = () => {
             ></path>
             <path
               id="路径 3"
-              fill-rule="evenodd"
+              fillRule="evenodd"
               fill="currentColor"
               transform="translate(0 0)  rotate(0 6 0.5)"
               opacity="1"
@@ -41,7 +41,7 @@ const IconTextAlignRight = () => {
             ></path>
             <path
               id="路径 4"
-              fill-rule="evenodd"
+              fillRule="evenodd"
               fill="currentColor"
               transform="translate(7 9)  rotate(0 2.5 0.5)"
               opacity="1"

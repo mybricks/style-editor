@@ -60,7 +60,7 @@ export default function ({
           <ChevronDownIcon />
         </Select.Icon>
       </Select.Trigger>
-      <Select.Portal>
+      <Select.Portal style={{ zIndex: 10000 }}>
         <Select.Content className="SelectContent">
           <Select.ScrollUpButton className="SelectScrollButton">
             <ChevronUpIcon />

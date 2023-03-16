@@ -1,4 +1,4 @@
-import React, { CSSProperties } from "react";
+import React, { CSSProperties, useMemo } from "react";
 import "./index.less";
 import { StyleEditorProps, StylePlugin } from "./types";
 import BackgroundPlugin from "./plugins/Background";
@@ -11,14 +11,49 @@ const StyleEditor = ({ options, value, onChange }: StyleEditorProps) => {
     onChange({ ...value, ...changedValue });
   };
 
+  const plugins = useMemo(() => {
+    if (Array.isArray(options)) {
+      // @ts-ignore
+      // 'border', 'font', 'bgcolor', 'bgimage', 'padding'
+      options = options.map((option) => option.toLowerCase());
+      // @ts-ignore
+      if (options.includes("bgcolor") || options.includes("bgimage")) {
+        // @ts-ignore
+        const index = options.indexOf("bgcolor") || options.indexOf("bgimage");
+        // @ts-ignore
+        options.splice(index, 0, "background");
+      }
+      // 旧版API兼容
+      return options;
+    } else {
+      // 新版API
+      if (options.uses) return options.uses;
+      else if (options.plugins) return options.plugins;
+    }
+  }, [options]);
+
   const renderPlugin = (plugin: StylePlugin) => {
+    const { backgroundOptions = {} } = options as Record<string, any>;
+
+    if (Array.isArray(plugins)) {
+      // @ts-ignore
+      if (plugins.includes("bgcolor")) {
+        backgroundOptions.backgroundColor = true;
+      }
+      // @ts-ignore
+      if (plugins.includes("bgimage")) {
+        backgroundOptions.backgroundImage = true;
+      }
+    }
+
     switch (plugin) {
       case "background":
         // @ts-ignore
         return (
           <BackgroundPlugin
             key={plugin}
-            backgroundProps={options?.backgroundProps || {}}
+            // @ts-ignore
+            options={backgroundOptions || {}}
             value={value}
             onChange={onValueChange}
           />
@@ -48,7 +83,10 @@ const StyleEditor = ({ options, value, onChange }: StyleEditorProps) => {
   return (
     <div className="styleEditor">
       <div style={{ display: "flex", flexDirection: "column" }}>
-        {options?.plugins?.map((plugin) => renderPlugin(plugin))}
+        {
+          //@ts-ignore
+          plugins?.map((plugin) => renderPlugin(plugin))
+        }
       </div>
     </div>
   );

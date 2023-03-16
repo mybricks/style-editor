@@ -15,10 +15,7 @@ function App() {
         </div>
         <div style={{ width: 265 }}>
           <StyleEditor
-            options={{
-              presets: [],
-              plugins: ["border", "background", "font", "padding"],
-            }}
+            options={["font", "bgimage", "bgcolor", "padding", "border"]}
             value={value}
             onChange={(val) => {
               console.log("setValue", val);

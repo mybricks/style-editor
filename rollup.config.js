@@ -25,5 +25,5 @@ export default {
     uglify(),
     visualizer({ projectRoot: "./dist", open: true }),
   ],
-  external: ["react"],
+  external: ["react", 'react-dom'],
 };

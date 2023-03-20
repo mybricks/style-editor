@@ -12,6 +12,7 @@ export interface StyleEditorProps {
         backgroundProps?: {};
       };
   value: CSSProperties;
+  customComponents?: Record<string, Function>;
   onChange: (value: CSSProperties) => void;
 }
 

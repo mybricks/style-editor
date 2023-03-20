@@ -9,9 +9,15 @@ interface Props extends StylePluginProps {
     backgroundImage?: boolean;
     backgroundColor?: boolean;
   };
+  customComponents?: Record<string, Function>;
 }
 
-const BackgroundPlugin = ({ value, options, onChange }: Props) => {
+const BackgroundPlugin = ({
+  value,
+  options,
+  customComponents,
+  onChange,
+}: Props) => {
   return (
     <Panel title="背景">
       {options?.backgroundColor && (
@@ -24,13 +30,23 @@ const BackgroundPlugin = ({ value, options, onChange }: Props) => {
         />
       )}
       {options?.backgroundImage && (
-        <ImageEditor
-          value={value}
-          onChange={(value) => {
-            console.log("value", value);
-            onChange({ ...value });
-          }}
-        />
+        <>
+          {customComponents?.backgroundImage ? (
+            customComponents?.backgroundImage({
+              value,
+              onChange: () => {
+                onChange({ ...value });
+              },
+            })
+          ) : (
+            <ImageEditor
+              value={value}
+              onChange={(value) => {
+                onChange({ ...value });
+              }}
+            />
+          )}
+        </>
       )}
     </Panel>
   );

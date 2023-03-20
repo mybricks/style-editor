@@ -6,7 +6,12 @@ import BorderPlugin from "./plugins/Border";
 import FontPlugin from "./plugins/Font";
 import PaddingPlugin from "./plugins/Padding";
 
-const StyleEditor = ({ options, value, onChange }: StyleEditorProps) => {
+const StyleEditor = ({
+  value,
+  customComponents,
+  options,
+  onChange,
+}: StyleEditorProps) => {
   const onValueChange = (changedValue: CSSProperties) => {
     onChange({ ...value, ...changedValue });
   };
@@ -52,6 +57,7 @@ const StyleEditor = ({ options, value, onChange }: StyleEditorProps) => {
         return (
           <BackgroundPlugin
             key={plugin}
+            customComponents={customComponents}
             // @ts-ignore
             options={backgroundOptions || {}}
             value={value}

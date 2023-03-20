@@ -1,6 +1,6 @@
 {
   "name": "@mybricks/style-editor",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -11,8 +11,7 @@
   "scripts": {
     "start": "cd example && yarn dev",
     "dev": "cd example && yarn dev",
-    "build": "rollup -c",
-    "publish": "npm run build && npm publish"
+    "build": "rollup -c"
   },
   "keywords": [],
   "author": "",

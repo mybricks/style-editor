@@ -114,8 +114,8 @@ const BorderPlugin = ({ borderProps, value, onChange }: Props) => {
   const [activeBorderRadius, setActiveBorderRadius] = useState(
     "borderTopLeftRadius"
   );
-  const [borderRadiusAdvanced, setBorderRadiusAdvanced] = useState(false);
-  const [borderWidthAdvanced, setBorderWidthAdvanced] = useState(false);
+  const [borderRadiusAdvanced, setBorderRadiusAdvanced] = useState(true);
+  const [borderWidthAdvanced, setBorderWidthAdvanced] = useState(true);
 
   const onPropertyChange = (property: string, value: string) => {
     if (Number.isNaN(parseInt(value))) value = "0px";
@@ -155,7 +155,7 @@ const BorderPlugin = ({ borderProps, value, onChange }: Props) => {
       value?.borderLeftWidth === value?.borderRightWidth &&
       value?.borderTopWidth === value?.borderLeftWidth
     ) {
-      setBorderWidthAdvanced(true);
+      setBorderWidthAdvanced(false);
     }
 
     if (
@@ -167,7 +167,7 @@ const BorderPlugin = ({ borderProps, value, onChange }: Props) => {
       value?.borderTopRightRadius === value?.borderBottomRightRadius &&
       value?.borderTopLeftRadius === value?.borderTopRightRadius
     ) {
-      setBorderRadiusAdvanced(true);
+      setBorderRadiusAdvanced(false);
     }
   }, []);
 

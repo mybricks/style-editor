@@ -38,7 +38,10 @@ const PaddingPlugin = ({ value, onChange }: Props) => {
   };
 
   useEffect(() => {
-    if (value.paddingLeft !== value.paddingRight) {
+    if (
+      value.paddingLeft !== value.paddingRight ||
+      value.paddingTop !== value.paddingBottom
+    ) {
       setAdvancedMode(true);
     }
   }, []);

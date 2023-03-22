@@ -14,12 +14,14 @@ interface Props {
 
 const getHex = (str: string) => {
   const color = new Color(str);
-  if (color.a() === 1) {
-    return color.hex();
+  if (color.alpha() === 1) {
+    return color.hex().replace("#", "");
   } else {
-    return color.hexa();
+    return color.hexa().replace("#", "");
   }
 };
+
+const getAlpha = (color: string) => new Color(color).alpha();
 
 const ColorSwatch = ({ value, style, onChange }: Props) => {
   const ref = useRef<HTMLDivElement>(null),
@@ -65,7 +67,7 @@ const ColorSwatch = ({ value, style, onChange }: Props) => {
                 color={value}
                 onChange={({ hexa, rgba }) => {
                   const rgb = `rgba(${rgba.r}, ${rgba.g}, ${rgba.b}, ${rgba.a})`;
-
+                  setColor(new Color(rgb).hexa());
                   onChange(rgb);
                 }}
               />
@@ -85,16 +87,14 @@ const ColorSwatch = ({ value, style, onChange }: Props) => {
           value={color}
           onChange={(value) => setColor(value)}
           onBlur={() => {
-            const hex = new Color(color).hex();
-
+            const hex = new Color("#" + color).hex();
             onChange(hex);
           }}
         />
         <div
           className={classes.block}
           style={{
-            background:
-              value !== "rgba(255, 255, 255, 0)" ? value : transparentBg,
+            background: getAlpha(value) !== 0 ? value : transparentBg,
           }}
           onClick={() => {
             setShowColorPicker(true);

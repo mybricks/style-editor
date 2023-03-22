@@ -3,6 +3,7 @@ import commonjs from "@rollup/plugin-commonjs";
 import resolve from "@rollup/plugin-node-resolve";
 import replace from "@rollup/plugin-replace";
 import typescript from "@rollup/plugin-typescript";
+import json from '@rollup/plugin-json';
 import svgr from "@svgr/rollup";
 import postcss from "rollup-plugin-postcss";
 import { uglify } from "rollup-plugin-uglify";
@@ -22,6 +23,7 @@ export default {
     postcss(),
     babel(),
     typescript(),
+    json(),
     uglify(),
     visualizer({ projectRoot: "./dist", open: true }),
   ],

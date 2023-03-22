@@ -1,10 +1,13 @@
 import React, { CSSProperties, useMemo } from "react";
 import "./index.less";
+import pkg from '../package.json';
 import { StyleEditorProps, StylePlugin } from "./types";
 import BackgroundPlugin from "./plugins/Background";
 import BorderPlugin from "./plugins/Border";
 import FontPlugin from "./plugins/Font";
 import PaddingPlugin from "./plugins/Padding";
+
+console.log(`%c ${pkg.name} %c@${pkg.version}`,`color:#FFF;background:#fa6400`,``,``)
 
 const StyleEditor = ({
   value,

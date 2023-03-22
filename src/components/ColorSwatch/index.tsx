@@ -12,9 +12,18 @@ interface Props {
   onChange: (value: string) => void;
 }
 
+const getHex = (str: string) => {
+  const color = new Color(str);
+  if (color.a() === 1) {
+    return color.hex();
+  } else {
+    return color.hexa();
+  }
+};
+
 const ColorSwatch = ({ value, style, onChange }: Props) => {
   const ref = useRef<HTMLDivElement>(null),
-    [color, setColor] = useState(value),
+    [color, setColor] = useState(getHex(value)),
     [showColorPicker, setShowColorPicker] = useState(false);
 
   const renderColorPicker = () => {
@@ -76,8 +85,9 @@ const ColorSwatch = ({ value, style, onChange }: Props) => {
           value={color}
           onChange={(value) => setColor(value)}
           onBlur={() => {
-            const hexa = new Color(color).hexa();
-            onChange(hexa);
+            const hex = new Color(color).hex();
+
+            onChange(hex);
           }}
         />
         <div

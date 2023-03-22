@@ -3,6 +3,8 @@ import classes from "./index.module.less";
 import ColorPicker from "@mybricks/color-picker";
 import * as Portal from "@radix-ui/react-portal";
 import { transparentBg } from "./constant";
+import Input from "../Input";
+import Color from "color";
 
 interface Props {
   value: string;
@@ -12,6 +14,7 @@ interface Props {
 
 const ColorSwatch = ({ value, style, onChange }: Props) => {
   const ref = useRef<HTMLDivElement>(null),
+    [color, setColor] = useState(value),
     [showColorPicker, setShowColorPicker] = useState(false);
 
   const renderColorPicker = () => {
@@ -66,19 +69,25 @@ const ColorSwatch = ({ value, style, onChange }: Props) => {
 
   return (
     <>
-      <div
-        ref={ref}
-        className={classes.swatch}
-        style={style}
-        onClick={() => {
-          setShowColorPicker(true);
-        }}
-      >
+      <div ref={ref} className={classes.swatch} style={style}>
+        <Input
+          className={classes.input}
+          maxLength={9}
+          value={color}
+          onChange={(value) => setColor(value)}
+          onBlur={() => {
+            const hexa = new Color(color).hexa();
+            onChange(hexa);
+          }}
+        />
         <div
           className={classes.block}
           style={{
             background:
               value !== "rgba(255, 255, 255, 0)" ? value : transparentBg,
+          }}
+          onClick={() => {
+            setShowColorPicker(true);
           }}
         ></div>
       </div>

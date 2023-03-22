@@ -8,6 +8,7 @@ interface Props {
   value: string;
   addonBefore?: JSX.Element;
   disabled?: boolean;
+  maxLength?: number;
   style?: CSSProperties;
   innerStyle?: CSSProperties;
   onChange: (value: string) => void;
@@ -20,6 +21,7 @@ export default function ({
   defaultValue,
   value,
   disabled,
+  maxLength,
   addonBefore,
   style,
   innerStyle,
@@ -38,6 +40,7 @@ export default function ({
         value={value}
         disabled={disabled}
         style={{ width: addonBefore ? 39 : 69, ...innerStyle }}
+        maxLength={maxLength}
         onFocus={(e) => {
           onFocus && onFocus(e);
           inputRef.current && inputRef.current.select();

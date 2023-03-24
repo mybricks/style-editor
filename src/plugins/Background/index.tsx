@@ -34,7 +34,7 @@ const BackgroundPlugin = ({
           {customComponents?.backgroundImage ? (
             customComponents?.backgroundImage({
               value,
-              onChange: () => {
+              onChange: (value: React.CSSProperties) => {
                 onChange({ ...value });
               },
             })

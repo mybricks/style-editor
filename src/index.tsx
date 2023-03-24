@@ -54,6 +54,11 @@ const StyleEditor = ({
       }
     }
 
+    if (!Array.isArray(options)) {
+      backgroundOptions.backgroundColor = true;
+      backgroundOptions.backgroundImage = true;
+    }
+
     switch (plugin) {
       case "background":
         // @ts-ignore

@@ -5,10 +5,15 @@ import {
   backgroundPositionOptions,
   backgroundRepeatOptions,
   backgroundSizeOptions,
+  defaultBackgroundPosition,
+  defaultBackgroundRepeat,
+  defaultBackgroundSize,
   defaultImage,
 } from "./constant";
 import { file2Base64, getBackgroundImage } from "./utils";
 import Select from "../Select";
+import IconRowDelete from "./icons/IconRowDelete";
+import Tooltip from "../Tooltip";
 
 interface Props {
   value: CSSProperties;
@@ -37,6 +42,10 @@ export default function ({ value, onChange }: Props) {
 
     onChange({
       backgroundImage: `url(${base64})`,
+      backgroundSize: value?.backgroundSize || defaultBackgroundSize,
+      backgroundRepeat: value?.backgroundRepeat || defaultBackgroundRepeat,
+      backgroundPosition:
+        value?.backgroundPosition || defaultBackgroundPosition,
     });
   };
 
@@ -166,21 +175,38 @@ export default function ({ value, onChange }: Props) {
 
   return (
     <div className={classes.imageEditor} ref={ref}>
-      <div
-        className={classes.swatch}
-        ref={swatchRef}
-        onClick={() => setShowImagePicker(!showImagePicker)}
-      >
-        <img
-          className={classes.block}
-          src={
-            /\url\s*\(\s*["']?([^"'\r\n\)\(]+)["']?\s*\)/gi.exec(
-              value?.backgroundImage || ""
-            )?.[1] || defaultImage
-          }
-        />
+      <div className={classes.content}>
+        <div
+          className={classes.swatch}
+          ref={swatchRef}
+          onClick={() => setShowImagePicker(!showImagePicker)}
+        >
+          <img
+            className={classes.block}
+            src={
+              /\url\s*\(\s*["']?([^"'\r\n\)\(]+)["']?\s*\)/gi.exec(
+                value?.backgroundImage || ""
+              )?.[1] || defaultImage
+            }
+          />
+        </div>
+        <div className={classes.image}>图片</div>
       </div>
-      <div className={classes.image}>图片</div>
+      <Tooltip title="重置">
+        <div
+          className={classes.reset}
+          onClick={() => {
+            onChange({
+              backgroundImage: "",
+              backgroundSize: "",
+              backgroundRepeat: "",
+              backgroundPosition: "",
+            });
+          }}
+        >
+          <IconRowDelete />
+        </div>
+      </Tooltip>
       {renderImagePicker()}
     </div>
   );

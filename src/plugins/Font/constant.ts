@@ -5,3 +5,14 @@ export const fontWeigthOptions = [
     value: `${(index + 1) * 100}`,
   })),
 ];
+
+export const textAlignOptions = ["left", "center", "right"];
+
+export const textDecorationOptions = ["none", "line-through", "underline"];
+
+export const fontFamilyOptions = [
+  {
+    label: "默认字体",
+    value: "",
+  },
+];

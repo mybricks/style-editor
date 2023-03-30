@@ -15,12 +15,21 @@ import IconTextDecorationLineThrough from "./icons/IconTextDecorationLineThrough
 import IconTextDecorationUnderline from "./icons/IconTextDecorationUnderline";
 import IconLetterSpacing from "./icons/IconLetterSpacing";
 import ColorSwatch from "../../components/ColorSwatch";
-import { fontWeigthOptions } from "./constant";
+import {
+  fontFamilyOptions,
+  fontWeigthOptions,
+  textAlignOptions,
+  textDecorationOptions,
+} from "./constant";
 import IconFontSize from "./icons/IconFontSize";
 import Tooltip from "../../components/Tooltip";
 
 interface Props extends StylePluginProps {
-  fontProps?: {
+  fontOptions?: {
+    fontFamilyOptions: Array<{
+      label: string;
+      value: string;
+    }>;
     fontFamily?: boolean;
     fontSize?: boolean;
     fontWeight?: boolean;
@@ -28,10 +37,7 @@ interface Props extends StylePluginProps {
   };
 }
 
-const textAlignOptions = ["left", "center", "right"],
-  textDecorationOptions = ["none", "line-through", "underline"];
-
-const FontPlugin = ({ value, onChange }: Props) => {
+const FontPlugin = ({ value, onChange, fontOptions }: Props) => {
   const onPropertyChange = (property: string, value: string) => {
     // @ts-ignore
     if (Number.isNaN(parseInt(value))) value = "0px";
@@ -49,14 +55,8 @@ const FontPlugin = ({ value, onChange }: Props) => {
             backgroundColor: "#EFEFEF",
           }}
           options={[
-            {
-              label: "默认字体",
-              value: "",
-            },
-            {
-              label: "DIN",
-              value: "din",
-            },
+            ...fontFamilyOptions,
+            ...(fontOptions?.fontFamilyOptions || []),
           ]}
           // @ts-ignore
           value={value?.fontFamily || ""}

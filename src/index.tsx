@@ -1,13 +1,18 @@
 import React, { CSSProperties, useMemo } from "react";
 import "./index.less";
-import pkg from '../package.json';
+import pkg from "../package.json";
 import { StyleEditorProps, StylePlugin } from "./types";
 import BackgroundPlugin from "./plugins/Background";
 import BorderPlugin from "./plugins/Border";
 import FontPlugin from "./plugins/Font";
 import PaddingPlugin from "./plugins/Padding";
 
-console.log(`%c ${pkg.name} %c@${pkg.version}`,`color:#FFF;background:#fa6400`,``,``)
+console.log(
+  `%c ${pkg.name} %c@${pkg.version}`,
+  `color:#FFF;background:#fa6400`,
+  ``,
+  ``
+);
 
 const StyleEditor = ({
   value,
@@ -41,7 +46,10 @@ const StyleEditor = ({
   }, [options]);
 
   const renderPlugin = (plugin: StylePlugin) => {
-    const { backgroundOptions = {} } = options as Record<string, any>;
+    const { backgroundOptions = {}, fontOptions = {} } = options as Record<
+      string,
+      any
+    >;
 
     if (Array.isArray(plugins)) {
       // @ts-ignore
@@ -85,7 +93,12 @@ const StyleEditor = ({
         );
       case "font":
         return (
-          <FontPlugin key={plugin} value={value} onChange={onValueChange} />
+          <FontPlugin
+            key={plugin}
+            value={value}
+            onChange={onValueChange}
+            fontOptions={fontOptions}
+          />
         );
       case "padding":
         return (

@@ -9,7 +9,8 @@ export interface StyleEditorProps {
         presets: [];
         uses: StylePlugin[];
         plugins: StylePlugin[];
-        backgroundProps?: {};
+        backgroundOptions?: {};
+        fontOptions?: {};
       };
   value: CSSProperties;
   customComponents?: Record<string, Function>;

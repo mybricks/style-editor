@@ -21,13 +21,26 @@ const BackgroundPlugin = ({
   return (
     <Panel title="背景">
       {options?.backgroundColor && (
-        <ColorEditor
-          // @ts-ignore
-          value={value?.backgroundColor || "rgba(255, 255, 255, 0)"}
-          onChange={(color) => {
-            onChange({ backgroundColor: color });
-          }}
-        />
+        <>
+          {customComponents?.backgroundColor ? (
+            customComponents.backgroundImage({
+              value,
+              onChange: (value: string) => {
+                onChange({
+                  backgroundColor: value,
+                });
+              },
+            })
+          ) : (
+            <ColorEditor
+              // @ts-ignore
+              value={value?.backgroundColor || "rgba(255, 255, 255, 0)"}
+              onChange={(color) => {
+                onChange({ backgroundColor: color });
+              }}
+            />
+          )}
+        </>
       )}
       {options?.backgroundImage && (
         <>

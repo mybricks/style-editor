@@ -20,9 +20,14 @@ import {
   fontWeigthOptions,
   textAlignOptions,
   textDecorationOptions,
+  verticalAlignOptions,
 } from "./constant";
 import IconFontSize from "./icons/IconFontSize";
 import Tooltip from "../../components/Tooltip";
+import IconVerticalAlignTop from "./icons/IconVerticalAlignTop";
+import IconVerticalAlignBottom from "./icons/IconVerticalAlignBottom";
+import IconVerticalAlignMiddle from "./icons/IconVerticalAlignMiddle";
+import IconLineClamp from "./icons/IconLineClamp";
 
 interface Props extends StylePluginProps {
   fontOptions?: {
@@ -99,7 +104,7 @@ const FontPlugin = ({ value, onChange, fontOptions }: Props) => {
           }
           className={classes.fontSize}
           // @ts-ignore
-          value={parseInt(value?.fontSize || "12px")}
+          value={parseInt(value?.fontSize || "0px")}
           onChange={(value) => onPropertyChange("fontSize", value)}
         />
       </Panel.Content>
@@ -185,8 +190,78 @@ const FontPlugin = ({ value, onChange, fontOptions }: Props) => {
           ))}
         </ToggleGroup.Root>
       </Panel.Content>
+      <Panel.Content>
+        <ToggleGroup.Root
+          className={classes.verticalAlignGroup}
+          type="single"
+          // @ts-ignore
+          value={value?.verticalAlign || "top"}
+          // @ts-ignore
+          onValueChange={(value) => {
+            // @ts-ignore
+            value && onChange({ verticalAlign: value });
+          }}
+        >
+          {verticalAlignOptions.map((verticalAlign) => (
+            <ToggleGroup.Item
+              key={verticalAlign}
+              className={classNames(
+                classes.verticalAlignItem,
+                (value?.verticalAlign || "top") === verticalAlign
+                  ? classes.active
+                  : null
+              )}
+              value={verticalAlign}
+            >
+              {renderVerticalAlignIcon(verticalAlign)}
+            </ToggleGroup.Item>
+          ))}
+        </ToggleGroup.Root>
+        <Input
+          className={classes.lineClamp}
+          addonBefore={
+            <Tooltip title="行数">
+              <div>
+                <IconLineClamp />
+              </div>
+            </Tooltip>
+          }
+          // @ts-ignore
+          value={value?.lineClamp || 1}
+          innerStyle={{ width: 41 }}
+          // @ts-ignore
+          onChange={(value) =>
+            onChange({
+              lineClamp: !isNaN(parseInt(value)) ? parseInt(value) : 1,
+            })
+          }
+        />
+      </Panel.Content>
     </Panel>
   );
+};
+
+const renderVerticalAlignIcon = (verticalAlign: string) => {
+  switch (verticalAlign) {
+    case "top":
+      return (
+        <Tooltip title="顶对齐">
+          <IconVerticalAlignTop />
+        </Tooltip>
+      );
+    case "middle":
+      return (
+        <Tooltip title="居中对齐">
+          <IconVerticalAlignMiddle />
+        </Tooltip>
+      );
+    case "bottom":
+      return (
+        <Tooltip title="底对齐">
+          <IconVerticalAlignBottom />
+        </Tooltip>
+      );
+  }
 };
 
 const renderTextAlignIcon = (textAlign: string) => {

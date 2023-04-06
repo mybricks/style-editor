@@ -8,6 +8,8 @@ export const fontWeigthOptions = [
 
 export const textAlignOptions = ["left", "center", "right"];
 
+export const verticalAlignOptions = ["top", "middle", "bottom"];
+
 export const textDecorationOptions = ["none", "line-through", "underline"];
 
 export const fontFamilyOptions = [

@@ -46,7 +46,7 @@ const FontPlugin = ({ value, onChange, fontOptions }: Props) => {
   const onPropertyChange = (property: string, value: string) => {
     // @ts-ignore
     if (Number.isNaN(parseInt(value))) value = "0px";
-    onChange({ [property]: parseInt(value) + "px" });
+    onChange({ [property]: parseFloat(value) + "px" });
   };
 
   return (
@@ -133,9 +133,12 @@ const FontPlugin = ({ value, onChange, fontOptions }: Props) => {
             </Tooltip>
           }
           // @ts-ignore
-          value={parseInt(value?.letterSpacing || "0px")}
-          // @ts-ignore
-          onChange={(value) => onPropertyChange("letterSpacing", value)}
+          defaultValue={parseFloat(value?.letterSpacing || "0px")}
+          onBlur={(value) => {
+            // @ts-ignore
+            if (isNaN(parseFloat(value))) value = 0;
+            onChange({ letterSpacing: parseFloat(value) + "px" });
+          }}
         />
       </Panel.Content>
       <Panel.Content>

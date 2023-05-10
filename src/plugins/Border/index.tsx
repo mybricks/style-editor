@@ -103,14 +103,14 @@ const renderActiveBorderRadiusIcon = (
 };
 
 interface Props extends StylePluginProps {
-  borderProps: {
+  borderOptions: {
     borderColor: boolean;
     borderRadius: boolean;
     borderWidth: boolean;
   };
 }
 
-const BorderPlugin = ({ borderProps, value, onChange }: Props) => {
+const BorderPlugin = ({ borderOptions, value, onChange }: Props) => {
   const [activeBorderRadius, setActiveBorderRadius] = useState(
     "borderTopLeftRadius"
   );
@@ -172,7 +172,7 @@ const BorderPlugin = ({ borderProps, value, onChange }: Props) => {
   }, []);
 
   const renderBorderColor = () => {
-    if (borderProps?.borderColor === false) return null;
+    if (borderOptions?.borderColor === false) return null;
     return (
       <ColorEditor
         // @ts-ignore
@@ -185,7 +185,7 @@ const BorderPlugin = ({ borderProps, value, onChange }: Props) => {
   };
 
   const renderBorderRadius = () => {
-    if (borderProps?.borderRadius === false) return null;
+    if (borderOptions?.borderRadius === false) return null;
 
     return (
       <Panel.Content className={classes.borderRadiusWrapper}>
@@ -249,7 +249,7 @@ const BorderPlugin = ({ borderProps, value, onChange }: Props) => {
   };
 
   const renderBorderStyle = () => {
-    if (borderProps?.borderWidth === false) return null;
+    if (borderOptions?.borderWidth === false) return null;
 
     return (
       <Panel.Content className={classes.borderStyleWrapper}>
@@ -320,7 +320,7 @@ const BorderPlugin = ({ borderProps, value, onChange }: Props) => {
   };
 
   const renderBorderWidth = () => {
-    if (borderProps?.borderWidth === false) return null;
+    if (borderOptions?.borderWidth === false) return null;
 
     if (!borderWidthAdvanced) return null;
 

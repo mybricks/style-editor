@@ -25,68 +25,58 @@ const StyleEditor = ({
   };
 
   const plugins = useMemo(() => {
+    let plugins;
     if (Array.isArray(options)) {
-      // @ts-ignore
-      // 'border', 'font', 'bgcolor', 'bgimage', 'padding'
-      options = options.map((option) => option.toLowerCase());
-      // @ts-ignore
-      if (options.includes("bgcolor") || options.includes("bgimage")) {
-        // @ts-ignore
-        const index = options.indexOf("bgcolor") || options.indexOf("bgimage");
-        // @ts-ignore
-        options.splice(index, 0, "background");
-      }
-      // 旧版API兼容
-      return options;
+      plugins = options;
     } else {
-      // 新版API
-      if (options.uses) return options.uses;
-      else if (options.plugins) return options.plugins;
+      plugins = options.uses || options.plugins;
     }
+    plugins = plugins.map((item) => item.toLowerCase());
+
+    if (
+      plugins.indexOf("bgcolor") !== -1 ||
+      plugins.indexOf("bgimage") !== -1
+    ) {
+      plugins.push("background");
+    }
+    return plugins;
   }, [options]);
 
   const renderPlugin = (plugin: StylePlugin) => {
-    const { backgroundOptions = {}, fontOptions = {} } = options as Record<
-      string,
-      any
-    >;
+    const {
+      backgroundOptions = {},
+      fontOptions = {},
+      borderOptions = {},
+    } = options as Record<string, any>;
 
-    if (Array.isArray(plugins)) {
-      // @ts-ignore
-      if (plugins.includes("bgcolor")) {
-        backgroundOptions.backgroundColor = true;
-      }
-      // @ts-ignore
-      if (plugins.includes("bgimage")) {
-        backgroundOptions.backgroundImage = true;
-      }
-    }
-
-    if (!Array.isArray(options)) {
+    // 兼容旧版本
+    if (plugins.includes("bgcolor") && !plugins.includes("bgimage")) {
+      backgroundOptions.backgroundColor = true;
+      backgroundOptions.backgroundImage = false;
+    } else if (!plugins.includes("bgcolor") && plugins.includes("bgimage")) {
+      backgroundOptions.backgroundColor = false;
+      backgroundOptions.backgroundImage = true;
+    } else {
       backgroundOptions.backgroundColor = true;
       backgroundOptions.backgroundImage = true;
     }
 
     switch (plugin) {
       case "background":
-        // @ts-ignore
         return (
           <BackgroundPlugin
             key={plugin}
             customComponents={customComponents}
-            // @ts-ignore
             options={backgroundOptions || {}}
             value={value}
             onChange={onValueChange}
           />
         );
       case "border":
-        // @ts-ignore
         return (
           <BorderPlugin
             key={plugin}
-            // @ts-ignore
-            borderProps={options?.borderProps || {}}
+            borderOptions={borderOptions || {}}
             value={value}
             onChange={onValueChange}
           />

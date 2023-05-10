@@ -1,6 +1,6 @@
 import { CSSProperties } from "react";
 
-export type StylePlugin = "background" | "border" | "padding" | "font";
+export type StylePlugin = "size" | "background" | "border" | "padding" | "font";
 
 export interface StyleEditorProps {
   options:

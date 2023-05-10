@@ -6,6 +6,7 @@ import BackgroundPlugin from "./plugins/Background";
 import BorderPlugin from "./plugins/Border";
 import FontPlugin from "./plugins/Font";
 import PaddingPlugin from "./plugins/Padding";
+import SizePlugin from "./plugins/Size";
 
 console.log(
   `%c ${pkg.name} %c@${pkg.version}`,
@@ -17,7 +18,7 @@ console.log(
 const StyleEditor = ({
   value,
   customComponents,
-  options,
+  options = ["font", "border", "background", "padding", "size"],
   onChange,
 }: StyleEditorProps) => {
   const onValueChange = (changedValue: CSSProperties) => {
@@ -94,6 +95,10 @@ const StyleEditor = ({
         return (
           <PaddingPlugin key={plugin} value={value} onChange={onValueChange} />
         );
+      // case "size":
+      //   return (
+      //     <SizePlugin key={plugin} value={value} onChange={onValueChange} />
+      //   );
     }
   };
 

@@ -10,8 +10,8 @@ export default function () {
     >
       <path
         d="M6 6h2v1H6V6zm0 10h2v1H6v-1zm0-5h2v1H6v-1zm4-5h8v1h-8V6zm0 10h8v1h-8v-1zm0-5h8v1h-8v-1z"
-        fill-rule="nonzero"
-        fill-opacity="1"
+        fillRule="nonzero"
+        fillOpacity="1"
         fill="#000"
         stroke="none"
       ></path>

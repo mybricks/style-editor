@@ -176,7 +176,7 @@ const BorderPlugin = ({ borderOptions, value, onChange }: Props) => {
     return (
       <ColorEditor
         // @ts-ignore
-        value={value?.borderColor || "rgba(255, 255, 255, 0)"}
+        value={value?.borderColor || "#ffffff00"}
         onChange={(color) => {
           onChange({ borderColor: color });
         }}

@@ -34,7 +34,7 @@ const BackgroundPlugin = ({
           ) : (
             <ColorEditor
               // @ts-ignore
-              value={value?.backgroundColor || "rgba(255, 255, 255, 0)"}
+              value={value?.backgroundColor || "#ffffff00"}
               onChange={(color) => {
                 onChange({ backgroundColor: color });
               }}

@@ -15,9 +15,9 @@ interface Props {
 const getHex = (str: string) => {
   const color = new Color(str);
   if (color.alpha() === 1) {
-    return color.hex().replace("#", "");
+    return color.hex();
   } else {
-    return color.hexa().replace("#", "");
+    return color.hexa();
   }
 };
 
@@ -65,10 +65,16 @@ const ColorSwatch = ({ value, style, onChange }: Props) => {
             >
               <ColorPicker
                 color={value}
-                onChange={({ hexa, rgba }) => {
-                  const rgb = `rgba(${rgba.r}, ${rgba.g}, ${rgba.b}, ${rgba.a})`;
-                  setColor(new Color(rgb).hexa());
-                  onChange(rgb);
+                onChange={({ hexa, hex, rgba }) => {
+                  const alpha = rgba.a;
+
+                  if (alpha === 1) {
+                    setColor(hex);
+                    onChange(hex);
+                  } else {
+                    setColor(hexa);
+                    onChange(hexa);
+                  }
                 }}
               />
             </div>
@@ -87,7 +93,7 @@ const ColorSwatch = ({ value, style, onChange }: Props) => {
           value={color}
           onChange={(value) => setColor(value)}
           onBlur={() => {
-            const hex = new Color("#" + color).hex();
+            const hex = new Color(color).hex();
             onChange(hex);
           }}
         />

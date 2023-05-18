@@ -57,12 +57,17 @@ export default function ({ value, onChange }: Props) {
             >
               <ColorPicker
                 color={value}
-                onChange={({ hexa, rgba }) => {
-                  const rgb = `rgba(${rgba.r}, ${rgba.g}, ${rgba.b}, ${rgba.a})`;
-                  const { hex, alpha } = getHex(rgb);
+                onChange={(props) => {
+                  const { hexa, rgba, hex } = props;
+                  const alpha = rgba.a;
                   setHex(hex);
-                  setAlpha(alpha);
-                  onChange(rgb);
+                  setAlpha(`${alpha * 100}%`);
+                  if(alpha === 1) {
+                    onChange(hex);
+                  } else {
+                    onChange(hexa);
+                  }
+                  
                 }}
               />
             </div>

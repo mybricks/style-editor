@@ -18,7 +18,6 @@ function App() {
             // options={["size", "background", ]}
             value={value}
             onChange={(val) => {
-              console.log("setValue", val);
               setValue({ ...value, ...val });
             }}
           />

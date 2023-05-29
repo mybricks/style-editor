@@ -20,8 +20,8 @@ const PaddingPlugin = ({ value, onChange }: Props) => {
 
   const onPropertyChange = (property: string, value: string) => {
     // @ts-ignore
-    if (Number.isNaN(parseInt(value))) value = "0px";
-    onChange({ [property]: parseInt(value) + "px" });
+    if (Number.isNaN(parseFloat(value))) value = "0px";
+    onChange({ [property]: parseFloat(value) + "px" });
   };
 
   const onPaddingChange = () => {
@@ -68,13 +68,13 @@ const PaddingPlugin = ({ value, onChange }: Props) => {
             }
             className={css.paddingDirection}
             // @ts-ignore
-            value={parseInt(value?.paddingLeft || "0px")}
-            onChange={(value) => {
+            value={parseFloat(value?.paddingLeft || "0px")}
+            onBlur={(value) => {
               if (advancedMode) {
                 onPropertyChange("paddingLeft", value);
               } else {
-                if (Number.isNaN(parseInt(value))) value = "0";
-                value = parseInt(value) + "px";
+                if (Number.isNaN(parseFloat(value))) value = "0";
+                value = parseFloat(value) + "px";
                 onChange({
                   paddingLeft: value,
                   paddingRight: value,
@@ -100,13 +100,13 @@ const PaddingPlugin = ({ value, onChange }: Props) => {
             }
             className={css.paddingDirection}
             // @ts-ignore
-            value={parseInt(value?.paddingTop || "0px")}
-            onChange={(value) => {
+            value={parseFloat(value?.paddingTop || "0px")}
+            onBlur={(value) => {
               if (advancedMode) {
                 onPropertyChange("paddingTop", value);
               } else {
-                if (Number.isNaN(parseInt(value))) value = "0px";
-                value = parseInt(value) + "px";
+                if (Number.isNaN(parseFloat(value))) value = "0px";
+                value = parseFloat(value) + "px";
                 onChange({
                   paddingTop: value,
                   paddingBottom: value,
@@ -126,8 +126,8 @@ const PaddingPlugin = ({ value, onChange }: Props) => {
                 }
                 className={css.paddingDirection}
                 // @ts-ignore
-                value={parseInt(value?.paddingRight || "0px")}
-                onChange={(value) => onPropertyChange("paddingRight", value)}
+                value={parseFloat(value?.paddingRight || "0px")}
+                onBlur={(value) => onPropertyChange("paddingRight", value)}
               />
               <Input
                 addonBefore={
@@ -139,8 +139,8 @@ const PaddingPlugin = ({ value, onChange }: Props) => {
                 }
                 className={css.paddingDirection}
                 // @ts-ignore
-                value={parseInt(value?.paddingBottom || "0px")}
-                onChange={(value) => onPropertyChange("paddingBottom", value)}
+                value={parseFloat(value?.paddingBottom || "0px")}
+                onBlur={(value) => onPropertyChange("paddingBottom", value)}
               />
             </>
           ) : null}

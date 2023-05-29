@@ -118,8 +118,8 @@ const BorderPlugin = ({ borderOptions, value, onChange }: Props) => {
   const [borderWidthAdvanced, setBorderWidthAdvanced] = useState(true);
 
   const onPropertyChange = (property: string, value: string) => {
-    if (Number.isNaN(parseInt(value))) value = "0px";
-    onChange({ [property]: parseInt(value) + "px" });
+    if (Number.isNaN(parseFloat(value))) value = "0px";
+    onChange({ [property]: parseFloat(value) + "px" });
   };
 
   const onBorderWidthChange = () => {
@@ -147,10 +147,6 @@ const BorderPlugin = ({ borderOptions, value, onChange }: Props) => {
 
   useEffect(() => {
     if (
-      value?.borderTopWidth &&
-      value?.borderLeftWidth &&
-      value?.borderRightWidth &&
-      value?.borderBottomWidth &&
       value?.borderTopWidth === value?.borderBottomWidth &&
       value?.borderLeftWidth === value?.borderRightWidth &&
       value?.borderTopWidth === value?.borderLeftWidth
@@ -159,10 +155,6 @@ const BorderPlugin = ({ borderOptions, value, onChange }: Props) => {
     }
 
     if (
-      value?.borderTopLeftRadius &&
-      value?.borderTopRightRadius &&
-      value?.borderBottomLeftRadius &&
-      value?.borderBottomRightRadius &&
       value?.borderTopLeftRadius === value?.borderBottomLeftRadius &&
       value?.borderTopRightRadius === value?.borderBottomRightRadius &&
       value?.borderTopLeftRadius === value?.borderTopRightRadius
@@ -176,7 +168,7 @@ const BorderPlugin = ({ borderOptions, value, onChange }: Props) => {
     return (
       <ColorEditor
         // @ts-ignore
-        value={value?.borderColor || "#ffffff00"}
+        value={value?.borderColor || "transparent"}
         onChange={(color) => {
           onChange({ borderColor: color });
         }}
@@ -213,15 +205,15 @@ const BorderPlugin = ({ borderOptions, value, onChange }: Props) => {
                   }}
                   innerStyle={{ width: 30 }}
                   // @ts-ignore
-                  value={parseInt(value?.[borderRadiusKey] || "0px")}
+                  value={parseFloat(value?.[borderRadiusKey] || "0px")}
                   onFocus={() => setActiveBorderRadius(borderRadiusKey)}
-                  onChange={(value) => {
+                  onBlur={(value) => {
                     if (borderRadiusAdvanced) {
                       onPropertyChange(borderRadiusKey, value);
                     } else {
-                      if (Number.isNaN(parseInt(value))) value = "0px";
+                      if (Number.isNaN(parseFloat(value))) value = "0px";
                       // @ts-ignore
-                      value = parseInt(value) + "px";
+                      value = parseFloat(value) + "px";
                       onChange({
                         borderTopLeftRadius: value,
                         borderTopRightRadius: value,
@@ -288,12 +280,12 @@ const BorderPlugin = ({ borderOptions, value, onChange }: Props) => {
               borderWidthAdvanced
                 ? "Mixed"
                 : // @ts-ignore
-                  parseInt(value?.borderTopWidth || "0px")
+                  parseFloat(value?.borderTopWidth || "0px")
             }
-            onChange={(value) => {
-              if (Number.isNaN(parseInt(value))) value = "0px";
+            onBlur={(value) => {
+              if (Number.isNaN(parseFloat(value))) value = "0px";
               // @ts-ignore
-              value = parseInt(value) + "px";
+              value = parseFloat(value) + "px";
               if (!borderWidthAdvanced) {
                 onChange({
                   borderTopWidth: value,
@@ -334,9 +326,9 @@ const BorderPlugin = ({ borderOptions, value, onChange }: Props) => {
               addonBefore={renderActiveBorderWidthIcon(key)}
               innerStyle={{ width: 30 }}
               // @ts-ignore
-              value={parseInt(value?.[key] || "0px")}
+              value={parseFloat(value?.[key] || "0px")}
               onFocus={() => setActiveBorderRadius(key)}
-              onChange={(value) => onPropertyChange(key, value)}
+              onBlur={(value) => onPropertyChange(key, value)}
             />
           ))}
         </div>

@@ -1,23 +1,19 @@
+import Color from "color";
 import colorString from "color-string";
 
-export const getHex = (color: string) => {
-  const rgba = colorString.get(color || "transparent")?.value as number[];
-  let alpha = rgba?.pop();
-  if (alpha === null || alpha === undefined) alpha = 1;
-  return {
-    hex: colorString.to.hex(rgba),
-    alpha: alpha * 100 + "%",
-  };
-};
-
-export const toRgba = (hex: string, alpha: string | number) => {
-  const rgba = (colorString.get(hex)?.value as number[]) || [255, 255, 255, 0];
-  rgba.length === 4 && rgba.pop();
-  let a = typeof alpha === "string" ? parseInt(alpha) : alpha;
-  if (a < 0) a = 0;
-  else if (a > 100) a = 100;
-  rgba.push(a);
-  return colorString.to.rgb(rgba);
+export const getHex = (str: string, alpha?: string) => {
+  let color = new Color(str);
+  if (alpha !== undefined && alpha !== null) {
+    let a = parseInt(alpha);
+    if (a < 0) a = 0;
+    else if (a > 100) a = 100;
+    color = color.alpha(a / 100);
+  }
+  if (color.alpha() === 1) {
+    return color.hex().toLowerCase();
+  } else {
+    return color.hexa().toLowerCase();
+  }
 };
 
 export const checkColorType = (value: string) => {

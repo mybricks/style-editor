@@ -10,8 +10,8 @@ interface Props extends StylePluginProps {}
 export default ({ value, onChange }: Props) => {
   const onPropertyChange = (property: string, value: string) => {
     // @ts-ignore
-    if (Number.isNaN(parseInt(value))) value = "0px";
-    onChange({ [property]: parseInt(value) + "px" });
+    if (Number.isNaN(parseFloat(value))) value = "0px";
+    onChange({ [property]: parseFloat(value) + "px" });
   };
 
   const onPaddingChange = () => {
@@ -30,7 +30,7 @@ export default ({ value, onChange }: Props) => {
     <Panel title="尺寸" className={css.paddingPlugin}>
       <Panel.Content>
         <div className={css.paddingWrapper}>
-          <Input value={1} onChange={() => {}}/>
+          <Input value={1} onBlur={() => {}} />
         </div>
       </Panel.Content>
     </Panel>

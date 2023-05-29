@@ -4,8 +4,9 @@ import classes from "./index.module.less";
 import ColorPicker from "@mybricks/color-picker";
 import * as Portal from "@radix-ui/react-portal";
 import { ReactComponent as Unbinding } from "../../assets/unbinding.svg";
-import { getHex, toRgba, checkColorType } from "./utils";
+import { getHex, checkColorType } from "./utils";
 import { transparentBg } from "./constant";
+import Color from "color";
 
 interface Props {
   value: string;
@@ -13,8 +14,8 @@ interface Props {
 }
 
 export default function ({ value, onChange }: Props) {
-  const [hex, setHex] = useState(getHex(value).hex),
-    [alpha, setAlpha] = useState(getHex(value).alpha);
+  const [hex, setHex] = useState(new Color(value).hex().toLowerCase()),
+    [alpha, setAlpha] = useState(`${new Color(value).alpha() * 100}%`);
 
   const ref = useRef<HTMLDivElement>(null);
   const swatchRef = useRef<HTMLDivElement>(null);
@@ -59,15 +60,16 @@ export default function ({ value, onChange }: Props) {
                 color={value}
                 onChange={(props) => {
                   const { hexa, rgba, hex } = props;
-                  const alpha = rgba.a;
                   setHex(hex);
-                  setAlpha(`${alpha * 100}%`);
-                  if(alpha === 1) {
+                  let alpha = parseInt(String(rgba.a * 100));
+                  if (alpha < 0) alpha = 0;
+                  if (alpha > 100) alpha = 100;
+                  setAlpha(`${alpha}%`);
+                  if (alpha === 100) {
                     onChange(hex);
                   } else {
                     onChange(hexa);
                   }
-                  
                 }}
               />
             </div>
@@ -92,32 +94,49 @@ export default function ({ value, onChange }: Props) {
               className={classes.block}
               style={{
                 background:
-                  parseInt(alpha) !== 0 ? toRgba(hex, alpha) : transparentBg,
+                  parseInt(alpha) !== 0 ? getHex(hex, alpha) : transparentBg,
               }}
             ></div>
           </div>
           <Input
             value={hex}
-            onChange={(value) => {
-              if (value.length > 7) value = value.slice(0, 7);
-              setHex(value);
-            }}
-            onBlur={(value) => {
-              if (value.length > 7) value = value.slice(0, 7);
-              setHex(value);
-              onChange(toRgba(value, alpha));
+            onBlur={(val) => {
+              if (!val.startsWith("#")) {
+                val = `#${val}`;
+              }
+              let hex;
+              try {
+                hex = new Color(val).hex().toLowerCase();
+              } catch (e) {
+                console.log(e);
+                hex = new Color("#ffffff").hex().toLowerCase();
+              }
+              setHex(hex);
+              const newColor = getHex(hex, alpha);
+
+              // 值为默认值 transparent，且新值还是默认值，表示未改变颜色，不触发onChange
+              if (value === "transparent" && newColor === "#00000000") {
+                return;
+              }
+
+              onChange(newColor);
             }}
           />
           <Input
             value={alpha}
-            onChange={(value) => {
-              setAlpha(value);
-            }}
-            onBlur={(value) => {
-              let alpha = parseInt(value);
+            onBlur={(val) => {
+              let alpha = parseInt(val);
               if (alpha < 0) alpha = 0;
               if (alpha > 100) alpha = 100;
-              onChange(toRgba(hex, alpha));
+              setAlpha(`${alpha}%`);
+              const newColor = getHex(hex, `${alpha}%`);
+
+              // 值为默认值 transparent，且新值还是默认值，表示未改变颜色，不触发onChange
+              if (value === "transparent" && newColor === "#00000000") {
+                return;
+              }
+
+              onChange(newColor);
             }}
           />
         </div>

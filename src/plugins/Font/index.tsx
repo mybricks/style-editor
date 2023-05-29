@@ -45,7 +45,7 @@ interface Props extends StylePluginProps {
 const FontPlugin = ({ value, onChange, fontOptions }: Props) => {
   const onPropertyChange = (property: string, value: string) => {
     // @ts-ignore
-    if (Number.isNaN(parseInt(value))) value = "0px";
+    if (Number.isNaN(parseFloat(value))) value = "0px";
     onChange({ [property]: parseFloat(value) + "px" });
   };
 
@@ -104,8 +104,8 @@ const FontPlugin = ({ value, onChange, fontOptions }: Props) => {
           }
           className={classes.fontSize}
           // @ts-ignore
-          value={parseInt(value?.fontSize || "0px")}
-          onChange={(value) => onPropertyChange("fontSize", value)}
+          value={parseFloat(value?.fontSize || "0px")}
+          onBlur={(value) => onPropertyChange("fontSize", value)}
         />
       </Panel.Content>
       <Panel.Content>
@@ -119,9 +119,9 @@ const FontPlugin = ({ value, onChange, fontOptions }: Props) => {
             </Tooltip>
           }
           // @ts-ignore
-          value={parseInt(value?.lineHeight || "0px")}
+          value={parseFloat(value?.lineHeight || "0px")}
           // @ts-ignore
-          onChange={(value) => onPropertyChange("lineHeight", value)}
+          onBlur={(value) => onPropertyChange("lineHeight", value)}
         />
         <Input
           className={classes.letterSpacing}
@@ -233,7 +233,7 @@ const FontPlugin = ({ value, onChange, fontOptions }: Props) => {
           value={value?.lineClamp || 1}
           innerStyle={{ width: 41 }}
           // @ts-ignore
-          onChange={(value) =>
+          onBlur={(value) =>
             onChange({
               lineClamp: !isNaN(parseInt(value)) ? parseInt(value) : 1,
             })

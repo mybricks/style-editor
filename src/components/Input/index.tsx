@@ -1,6 +1,7 @@
 import classNames from "classnames";
-import React, { CSSProperties, useRef, useState } from "react";
+import React, { CSSProperties, useEffect, useRef, useState } from "react";
 import styles from "./index.module.less";
+import Color from "color";
 
 interface Props {
   className?: string;
@@ -11,7 +12,7 @@ interface Props {
   maxLength?: number;
   style?: CSSProperties;
   innerStyle?: CSSProperties;
-  onChange: (value: string) => void;
+  onChange?: (value: string) => void;
   onBlur?: (value: string) => void;
   onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
 }
@@ -19,17 +20,22 @@ interface Props {
 export default function ({
   className,
   defaultValue,
-  value,
+  value: inputValue,
   disabled,
   maxLength,
   addonBefore,
   style,
   innerStyle,
-  onChange,
+  onChange = () => {},
   onBlur,
   onFocus,
 }: Props) {
   const inputRef = useRef<HTMLInputElement>(null);
+  const [value, setValue] = useState(inputValue);
+
+  useEffect(() => {
+    setValue(inputValue);
+  }, [inputValue]);
 
   return (
     <div className={classNames(styles.input, className)} style={style}>
@@ -42,14 +48,16 @@ export default function ({
         style={{ width: addonBefore ? 39 : 69, ...innerStyle }}
         maxLength={maxLength}
         onFocus={(e) => {
-          onFocus && onFocus(e);
+          onFocus?.(e);
           inputRef.current && inputRef.current.select();
         }}
         onBlur={(e) => {
-          onBlur && onBlur(e.target.value);
+          setValue(e.target.value);
+          onBlur?.(e.target.value);
         }}
         onChange={(e) => {
-          onChange(e.target.value);
+          setValue(e.target.value);
+          onChange?.(e.target.value);
         }}
       />
     </div>
